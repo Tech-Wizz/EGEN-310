@@ -1,3 +1,5 @@
+import sys
+sys.path.insert(0, '/home/pi/.local/lib/python3.7/site-packages')
 from gpiozero import LED
 from time import sleep
 import keyboard
@@ -7,23 +9,34 @@ leftMotor = LED(25)
 pump = LED(24)
 horn = LED(17)
 
+horn.on()
+sleep(1)
+horn.off()
+
+
 while True:
-    while keyboard.is_pressed("w") or keyboard.is_pressed("W"):	
-	rightMotor.on()
-	leftMotor.on()
-	print("Forward")
-    while keyboard.is_pressed("s") or keyboard.is_pressed("S"):
+
+    while keyboard.is_pressed("w"):	
+        rightMotor.on()
+        leftMotor.on()
+        print("Forward")
+
+    while keyboard.is_pressed("a"):
         rightMotor.on()
         print("RIGHT")
-    while keyboard.is_pressed("d") or keyboard.is_pressed("D"):
+
+    while keyboard.is_pressed("d"):
         leftMotor.on()
         print("LEFT")
-    while keyboard.is_pressed("p") or keyboard.is_pressed("P"):
+
+    while keyboard.is_pressed("p"):
         pump.on()
         print("PUMP")
-    while keyboard.is_pressed("h") or keyboard.is_pressed("H"):
+
+    while keyboard.is_pressed("h"):
         horn.on()
         print("Beep!")
+
     rightMotor.off()
     leftMotor.off()
     pump.off()
